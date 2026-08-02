@@ -1,0 +1,115 @@
+generated: '2026-08-01'
+method: derived
+source: >-
+  openapi/inflammatix-content-openapi.yml, openapi/inflammatix-support-content-openapi.yml,
+  plus the live type/taxonomy registries at https://inflammatix.com/wp-json/wp/v2/types,
+  /taxonomies and https://support.inflammatix.com/wp-json/wp/v2/types (fetched 2026-08-01).
+note: >-
+  The entity graph of the two WordPress REST content APIs Inflammatix serves. Post
+  types and their taxonomy bindings are read verbatim from each site's own `types`
+  and `taxonomies` endpoints — the relationships below are the ones WordPress itself
+  reports, not inferred ones.
+entities:
+- name: Publication
+  api: inflammatix:site-content
+  rest_base: publication
+  post_type: publication
+  description: >-
+    A peer-reviewed paper, abstract or poster in the Inflammatix clinical evidence
+    library. The company's only bespoke content type, and the substantive part of
+    this API — 117 posts and a separate publication archive sit behind it.
+  operations: [listPublications, getPublication]
+  key_fields: [id, slug, title, excerpt, content, date, modified, link, tags, category-publication, meta, _links]
+- name: PublicationCategory
+  api: inflammatix:site-content
+  rest_base: category-publication
+  taxonomy: category-publication
+  hierarchical: false
+  description: The taxonomy that classifies publications (registered by Inflammatix, not by WordPress core).
+  operations: [listPublicationCategories, getPublicationCategory]
+  key_fields: [id, name, slug, count, link]
+- name: Post
+  api: inflammatix:site-content
+  rest_base: posts
+  post_type: post
+  description: Newsroom items — press releases, news coverage and ML blog entries.
+  operations: [listPosts, getPost]
+- name: Page
+  api: inflammatix:site-content
+  rest_base: pages
+  post_type: page
+  description: Static site pages (TriVerity, pipeline, evidence, about, legal).
+  operations: [listPages, getPage]
+- name: MediaItem
+  api: inflammatix:site-content
+  rest_base: media
+  post_type: attachment
+  description: Uploaded assets, including the ISO 13485 and California licence certificate PDFs linked from the about page.
+  operations: [listMedia, getMediaItem]
+- name: Category
+  api: inflammatix:site-content
+  rest_base: categories
+  taxonomy: category
+  hierarchical: true
+  operations: [listCategories, getCategory]
+- name: Tag
+  api: inflammatix:site-content
+  rest_base: tags
+  taxonomy: post_tag
+  hierarchical: false
+  description: Shared taxonomy — bound to BOTH `post` and `publication` on this site.
+  operations: [listTags, getTag]
+- name: Comment
+  api: inflammatix:site-content
+  rest_base: comments
+  operations: [listComments, getComment]
+- name: Course
+  api: inflammatix:support-content
+  rest_base: mpcs-course
+  post_type: mpcs-course
+  description: >-
+    A MemberPress Courses training course in the Inflammatix support portal — the
+    Myrna and TriVerity operator curriculum. The catalogue is anonymously readable;
+    lesson bodies sit behind the customer login.
+  operations: [listCourses, getCourse]
+- name: Lesson
+  api: inflammatix:support-content
+  rest_base: mpcs-lesson
+  post_type: mpcs-lesson
+  operations: [listLessons, getLesson]
+- name: Quiz
+  api: inflammatix:support-content
+  rest_base: mpcs-quiz
+  post_type: mpcs-quiz
+  operations: [listQuizzes, getQuiz]
+- name: CourseCategory
+  api: inflammatix:support-content
+  rest_base: mpcs-course-categories
+  taxonomy: mpcs-course-categories
+  operations: [listCourseCategories, getCourseCategory]
+- name: CourseTag
+  api: inflammatix:support-content
+  rest_base: mpcs-course-tags
+  taxonomy: mpcs-course-tags
+  operations: [listCourseTags, getCourseTag]
+relationships:
+- {from: Publication, to: PublicationCategory, kind: has_many, via: category-publication, evidence: 'types.publication.taxonomies includes category-publication'}
+- {from: Publication, to: Tag, kind: has_many, via: tags, evidence: 'taxonomies.post_tag.types includes publication'}
+- {from: PublicationCategory, to: Publication, kind: has_many, via: 'filter category-publication=<term id>'}
+- {from: Post, to: Category, kind: has_many, via: categories, evidence: types.post.taxonomies includes category}
+- {from: Post, to: Tag, kind: has_many, via: tags, evidence: types.post.taxonomies includes post_tag}
+- {from: Post, to: MediaItem, kind: has_one, via: featured_media}
+- {from: Page, to: Page, kind: belongs_to, via: parent}
+- {from: Comment, to: Post, kind: belongs_to, via: post}
+- {from: Course, to: CourseCategory, kind: has_many, via: mpcs-course-categories}
+- {from: Course, to: CourseTag, kind: has_many, via: mpcs-course-tags}
+- {from: Course, to: Lesson, kind: has_many, via: curriculum, note: 'Curriculum membership is exposed through the plugin namespace /mpcs/courses/curriculum/{id}, not through wp/v2; the wp/v2 lesson collection does not carry a public parent-course field.'}
+- {from: Quiz, to: Course, kind: belongs_to, via: curriculum, note: Same caveat as Lesson.}
+traversal:
+  link_relations: >-
+    Every item carries a `_links` block with `self`, `collection`, `about`,
+    `wp:attachment`, `wp:term` and `curies`, so the graph is walkable from any single
+    response without out-of-band knowledge. Add `_embed` to inline the linked terms
+    and media.
+gaps:
+- No clinical or diagnostics entity is exposed anywhere. There is no Patient, Sample, Result, Instrument or Order resource — TriVerity results reach the LIS through the instrument's own connectivity options, which Inflammatix does not specify publicly.

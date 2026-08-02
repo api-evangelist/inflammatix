@@ -1,0 +1,99 @@
+generated: '2026-08-01'
+method: searched
+source: >-
+  https://inflammatix.com/about-us/ (certifications and licences, with linked PDFs),
+  https://inflammatix.com/triverity/ (connectivity claims), plus derivation from
+  openapi/inflammatix-content-openapi.yml and openapi/inflammatix-support-content-openapi.yml.
+note: >-
+  Two distinct layers. The regulatory/quality layer is real and published by
+  Inflammatix as a medical device manufacturer. The API-standards layer applies only
+  to the two WordPress REST content APIs, which is the whole of the machine-readable
+  surface the company serves.
+regulatory:
+- id: iso-13485-2016
+  conforms: true
+  evidence: >-
+    "ISO 13485:2016 Certificate" published on the about page, linking to BSI
+    certificate MD 749878 dated 2023-03-09
+    (https://inflammatix.com/wp-content/uploads/2025/05/ISO-Certificate-MD-749878-from-BSI-2023-03-09-1.pdf).
+- id: fda-510k-clearance
+  conforms: true
+  evidence: >-
+    FDA marketing authorization for the TriVerity Test System, announced January 2025
+    (https://inflammatix.com/inflammatix-receives-fda-clearance-for-first-in-class-triverity-test/).
+- id: fda-breakthrough-device-designation
+  conforms: true
+  evidence: 2023 FDA Breakthrough Device Designation, listed on the about page.
+- id: california-medical-device-manufacturing-licence
+  conforms: true
+  evidence: >-
+    State of California Department of Public Health device manufacturing licence PDF
+    linked from the about page (expires 2027-05-10).
+- id: soc-2
+  conforms: false
+  evidence: No SOC 2 report, trust centre, or security certification published anywhere on the site.
+- id: iso-27001
+  conforms: false
+  evidence: Not claimed. No information-security certification published.
+- id: hipaa
+  conforms: false
+  evidence: >-
+    No published HIPAA posture or BAA language. Inflammatix is a device manufacturer,
+    not a covered entity or a hosted service; the public site handles no PHI.
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: >-
+    Both contracts in openapi/ are OpenAPI 3.1.0 — derived by API Evangelist from the
+    provider's own route-discovery documents, not published by Inflammatix.
+  published_by_provider: false
+- id: rfc8288-web-linking
+  conforms: true
+  evidence: 'Collections return Link: <...>; rel="next" / rel="prev"; observed live 2026-08-01.'
+- id: http-basic-auth
+  conforms: true
+  evidence: >-
+    WordPress Application Passwords over HTTP Basic, advertised by the sites'
+    own REST index under authentication.application-passwords.
+- id: cors
+  conforms: true
+  evidence: 'Access-Control-Expose-Headers: X-WP-Total, X-WP-TotalPages, Link observed live.'
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 security scheme in either contract; no OAuth documentation.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 on every host.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors use the WordPress {code, message, data} envelope with application/json,
+    not application/problem+json. See errors/inflammatix-problem-types.yml.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on inflammatix.com and support.inflammatix.com.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header support; no deprecation policy published.
+- id: idempotency-key
+  conforms: false
+  evidence: No idempotency mechanism. See conventions/inflammatix-conventions.yml.
+- id: fhir
+  conforms: false
+  evidence: >-
+    No FHIR surface. Notable given the healthcare context — TriVerity results reach
+    the LIS through the Myrna instrument's own connectivity options, which Inflammatix
+    advertises ("multiple LIS connectivity options", https://inflammatix.com/triverity/)
+    but does not specify publicly. Whether that is HL7 v2, ASTM, or a proprietary
+    interface is not disclosed.
+- id: hl7-v2
+  conforms: unknown
+  evidence: >-
+    Claimed capability without a published specification: the TriVerity page states
+    the Myrna instrument supports "multiple LIS connectivity options" and remote
+    notification, but no interface specification, conformance statement, or integration
+    guide is published. Recorded as unknown rather than true — the claim is real, the
+    contract is not public.
+gaps:
+- The single largest interoperability gap is the undocumented Myrna-to-LIS interface. A published HL7 v2 conformance profile or a FHIR DiagnosticReport/Observation mapping would make TriVerity results integrable without a vendor engagement.
+- No security.txt, no vulnerability disclosure programme, no trust centre.

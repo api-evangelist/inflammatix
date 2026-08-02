@@ -1,0 +1,69 @@
+generated: '2026-08-01'
+method: probed
+source: live GET of the /.well-known/ discovery surface on every Inflammatix host
+note: >-
+  Every well-known path below was probed and missed. Recorded so a later round does
+  not re-probe blindly, and so the absence is auditable. No `WellKnown` pointer is
+  wired into apis.yml because nothing was found — an empty index must not be allowed
+  to satisfy the well_known_catalog check.
+found: 0
+hosts:
+- host: https://inflammatix.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 404}
+- host: https://www.inflammatix.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 404}
+- host: https://support.inflammatix.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 404}
+- host: https://api.inflammatix.com
+  documents:
+  - {path: '*', status: null, note: host does not resolve (DNS NXDOMAIN)}
+also_probed:
+  contract_discovery:
+  - {path: /openapi.json, status: 404, hosts: [inflammatix.com, www.inflammatix.com, support.inflammatix.com]}
+  - {path: /openapi.yaml, status: 404, hosts: [inflammatix.com, www.inflammatix.com, support.inflammatix.com]}
+  - {path: /swagger.json, status: 404, hosts: [inflammatix.com, www.inflammatix.com, support.inflammatix.com]}
+  - {path: /v1/openapi.json, status: 404, hosts: [inflammatix.com, www.inflammatix.com, support.inflammatix.com]}
+  - {path: /api-docs, status: 404, hosts: [inflammatix.com, www.inflammatix.com, support.inflammatix.com]}
+  - {path: /docs, status: 404, hosts: [inflammatix.com, www.inflammatix.com, support.inflammatix.com]}
+  - {path: /redoc, status: 404, hosts: [inflammatix.com, www.inflammatix.com, support.inflammatix.com]}
+  hit:
+  - path: /wp-json/
+    status: 200
+    content_type: application/json
+    hosts: [inflammatix.com, support.inflammatix.com]
+    note: >-
+      The WordPress REST route-discovery index — the only machine-readable contract
+      Inflammatix serves. Captured as openapi/inflammatix-content-openapi.yml and
+      openapi/inflammatix-support-content-openapi.yml.
+  subdomains_probed_no_dns:
+  - status.inflammatix.com
+  - trust.inflammatix.com
+  - security.inflammatix.com
+  - developer.inflammatix.com
+  - docs.inflammatix.com
+  - portal.inflammatix.com
+  - api.inflammatix.com

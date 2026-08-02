@@ -1,0 +1,62 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Inflammatix Support and Training Content API
+  version: 1.0.0
+extends: openapi/inflammatix-support-content-openapi.yml
+x-generated: '2026-08-01'
+x-method: generated
+x-source: >-
+  API Evangelist enrichment pipeline. Captures our annotations separately so the
+  contract derived from https://support.inflammatix.com/wp-json/ stays a faithful
+  mechanical translation of what the provider actually serves.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: inflammatix
+    x-apievangelist-api: inflammatix:support-content
+    x-apievangelist-surface: content
+    x-apievangelist-note: >-
+      The customer support and operator-training portal for the TriVerity Test System
+      and the Myrna instrument. The course catalogue is anonymously readable; lesson
+      bodies require the customer login at https://support.inflammatix.com/login/.
+    x-artifacts:
+      conventions: conventions/inflammatix-conventions.yml
+      errors: errors/inflammatix-problem-types.yml
+      data_model: data-model/inflammatix-data-model.yml
+      lifecycle: lifecycle/inflammatix-lifecycle.yml
+      conformance: conformance/inflammatix-conformance.yml
+      authentication: authentication/inflammatix-authentication.yml
+      skills: skills/_index.yml
+- target: $.paths['/wp/v2/mpcs-course'].get
+  update:
+    x-apievangelist-highlight: true
+    x-apievangelist-note: >-
+      The MemberPress Courses catalogue backing the Myrna and TriVerity operator
+      training curriculum. Anonymously readable metadata; enrolment and lesson bodies
+      are gated.
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      audit: optional
+- target: $.paths['/wp/v2/mpcs-lesson'].get
+  update:
+    x-apievangelist-note: >-
+      Lesson records. Titles and slugs are public; the `content` field is empty or
+      truncated for anonymous callers because the curriculum sits behind the login.
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      audit: optional
+- target: $.paths['/wp/v2/mpcs-quiz'].get
+  update:
+    x-apievangelist-note: Quiz records attached to the training curriculum.
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      audit: optional
+- target: $.components.securitySchemes.applicationPassword
+  update:
+    x-apievangelist-note: >-
+      Distinct from the customer login at /login/, which is a MemberPress member
+      session, not an API credential. Application Passwords gate the REST write
+      surface only.

@@ -1,0 +1,97 @@
+generated: '2026-08-01'
+method: derived
+source: >-
+  openapi/inflammatix-content-openapi.yml, openapi/inflammatix-support-content-openapi.yml,
+  plus live error responses observed against https://inflammatix.com/wp-json/wp/v2 on 2026-08-01.
+format: wordpress-rest
+rfc9457: false
+note: >-
+  Inflammatix serves no product API, so this catalogue covers the two WordPress REST
+  content APIs. WordPress does not use RFC 9457 problem+json; it returns its own
+  `{code, message, data}` envelope with `application/json`. Codes below are the ones
+  the modelled read operations can actually return.
+envelope:
+  media_type: application/json
+  fields:
+    code: Machine-readable error slug.
+    message: Human-readable message.
+    data.status: HTTP status code, repeated in the body.
+    data.params: Per-parameter validation messages (validation failures only).
+    data.details: Per-parameter structured error details (validation failures only).
+problems:
+- status: 400
+  code: rest_invalid_param
+  title: Invalid parameter
+  detail: >-
+    A query parameter failed validation — most often per_page above the maximum of
+    100, an out-of-enum `order`/`orderby`/`context` value, or a malformed ISO 8601
+    date in `after`/`before`.
+  remediation: Correct the named parameter listed in data.params and retry.
+  source_operations:
+  - openapi/inflammatix-content-openapi.yml#listPublications
+  - openapi/inflammatix-content-openapi.yml#listPosts
+  - openapi/inflammatix-support-content-openapi.yml#listCourses
+- status: 400
+  code: rest_post_invalid_page_number
+  title: Page number out of range
+  detail: The requested `page` is greater than the number of available pages for the collection.
+  remediation: Read X-WP-TotalPages from the collection response and stay within it.
+  source_operations:
+  - openapi/inflammatix-content-openapi.yml#listPublications
+  - openapi/inflammatix-support-content-openapi.yml#listLessons
+- status: 401
+  code: rest_forbidden
+  title: Authentication required
+  detail: >-
+    The operation, or the requested `context=edit`, requires authentication.
+    Inflammatix advertises WordPress Application Passwords over HTTP Basic as the
+    mechanism; anonymous callers get this on any non-public collection.
+  remediation: >-
+    Authenticate with a WordPress Application Password, or drop back to
+    `context=view` on published content.
+  source_operations:
+  - openapi/inflammatix-content-openapi.yml#listPosts
+  - openapi/inflammatix-support-content-openapi.yml#listLessons
+- status: 401
+  code: rest_forbidden_context
+  title: Insufficient permission for the requested context
+  detail: '`context=edit` was requested without sufficient capability.'
+  remediation: Use context=view or context=embed for anonymous reads.
+  source_operations:
+  - openapi/inflammatix-content-openapi.yml#listPublications
+- status: 404
+  code: rest_post_invalid_id
+  title: Resource not found
+  detail: No published item exists with the supplied id for that post type.
+  remediation: List the collection first and use an id from the response.
+  source_operations:
+  - openapi/inflammatix-content-openapi.yml#getPublication
+  - openapi/inflammatix-content-openapi.yml#getPost
+  - openapi/inflammatix-support-content-openapi.yml#getCourse
+- status: 404
+  code: rest_term_invalid
+  title: Term not found
+  detail: No taxonomy term exists with the supplied id.
+  remediation: List the taxonomy collection and use a returned term id.
+  source_operations:
+  - openapi/inflammatix-content-openapi.yml#getPublicationCategory
+  - openapi/inflammatix-support-content-openapi.yml#getCourseCategory
+- status: 404
+  code: rest_no_route
+  title: No route matched
+  detail: The path is not registered in the wp/v2 namespace on this host.
+  remediation: >-
+    Fetch the discovery index at /wp-json/ and use a route it enumerates — the two
+    hosts do not serve identical route sets.
+  source_operations:
+  - openapi/inflammatix-content-openapi.yml
+  - openapi/inflammatix-support-content-openapi.yml
+- status: 429
+  code: null
+  title: Too many requests
+  detail: >-
+    Observed live on 2026-08-01 from the Cloudflare edge in front of the site during
+    a rapid burst of requests. No documented limit and no Retry-After.
+  remediation: Pace requests and back off exponentially on 429.
+  source_operations:
+  - openapi/inflammatix-content-openapi.yml

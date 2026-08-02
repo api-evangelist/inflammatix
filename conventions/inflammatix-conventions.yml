@@ -1,0 +1,119 @@
+generated: '2026-08-01'
+method: derived
+source: >-
+  openapi/inflammatix-content-openapi.yml, openapi/inflammatix-support-content-openapi.yml
+  (both derived from the live WordPress REST route-discovery indexes), plus live
+  request/response observation of https://inflammatix.com/wp-json/ and
+  https://support.inflammatix.com/wp-json/ on 2026-08-01.
+scope: >-
+  Cross-cutting request/response semantics for the two WordPress REST content APIs
+  Inflammatix serves. Inflammatix publishes no developer API for the TriVerity Test
+  System or the Myrna instrument, so there are no product-API conventions to capture;
+  everything below is the WordPress REST contract as it is actually configured on
+  these two hosts.
+authentication:
+  style: none-for-reads
+  detail: >-
+    Every operation modelled in the two OpenAPI files is anonymously readable — no
+    key, token, or header is required. Write operations and non-public collections
+    require WordPress Application Passwords over HTTP Basic; the sites advertise the
+    authorization endpoint themselves under `authentication.application-passwords`
+    in the REST index.
+  authorize_endpoints:
+  - https://inflammatix.com/wp-admin/authorize-application.php
+  - https://support.inflammatix.com/wp-admin/authorize-application.php
+  artifact: authentication/inflammatix-authentication.yml
+idempotency:
+  supported: false
+  detail: >-
+    No idempotency key, no request-deduplication header, and no documented retry
+    contract. The modelled surface is read-only (GET), which is idempotent by HTTP
+    method, but the provider offers no idempotency mechanism for writes. No
+    `Idempotency` pointer is wired in apis.yml, because there is nothing to point at.
+pagination:
+  style: page-number
+  request_params:
+  - {name: page, type: integer, default: 1, description: Current page of the collection.}
+  - {name: per_page, type: integer, default: 10, maximum: 100, description: Maximum number of items returned per page.}
+  - {name: offset, type: integer, description: Offset the result set by a specific number of items.}
+  - {name: order, type: string, enum: [asc, desc], description: Sort direction.}
+  - {name: orderby, type: string, description: Field to sort the collection by.}
+  response_headers:
+  - {name: X-WP-Total, description: Total number of items in the collection.}
+  - {name: X-WP-TotalPages, description: Total number of pages in the collection.}
+  - {name: Link, description: 'RFC 8288 web links carrying rel="next" and rel="prev".'}
+  detail: >-
+    Standard WordPress REST pagination. Collections cap at per_page=100; asking for
+    more returns a 400 rest_invalid_param.
+filtering:
+  detail: >-
+    Collections accept the standard WordPress filters — `search`, `slug`, `include`,
+    `exclude`, `after`/`before` (ISO 8601 date-time), `author`, `status`, plus the
+    taxonomy filters registered for that post type.
+  notable:
+  - {api: site-content, param: 'category-publication', description: 'Filter the publication collection by publication category term id.'}
+  - {api: site-content, param: tags, description: Filter posts or publications by tag term id.}
+  - {api: support-content, param: 'mpcs-course-categories', description: Filter the training course collection by course category term id.}
+field_selection:
+  supported: true
+  params:
+  - {name: _fields, description: 'Comma-separated list of response fields to return (e.g. `_fields=id,title,link`).'}
+  - {name: _embed, description: Embed linked resources (author, terms, featured media) into the `_embedded` block of the response.}
+  - {name: context, enum: [view, embed, edit], default: view, description: 'Response shape; `edit` requires authentication.'}
+  detail: >-
+    Sparse fieldsets and embedding are both available and are the practical way to
+    keep publication/course payloads small for an agent.
+metadata:
+  detail: >-
+    Each item carries a `meta` object of registered post meta, plus `_links` (HAL-style
+    relation links) and, when `_embed` is used, an `_embedded` block. Both sites also
+    return Yoast SEO fields under `yoast_head_json` on public content.
+tracing:
+  request_id_header: null
+  detail: No request-id or correlation header is emitted. Responses carry cache headers from WP Engine (`x-cache`, `x-cacheable`).
+versioning:
+  scheme: namespace-path
+  current: wp/v2
+  detail: >-
+    The version lives in the URL namespace (`/wp-json/wp/v2/...`). The discovery index
+    at `/wp-json/` enumerates every namespace served, which is how new versions would
+    be announced. No dated versioning, no version header, no deprecation signalling.
+  artifact: lifecycle/inflammatix-lifecycle.yml
+error_envelope:
+  format: wordpress-rest
+  rfc9457: false
+  media_type: application/json
+  shape:
+    code: Machine-readable error slug, e.g. rest_post_invalid_id, rest_invalid_param, rest_no_route.
+    message: Human-readable message.
+    data:
+      status: HTTP status code, repeated in the body.
+      params: Per-parameter validation messages (validation failures only).
+      details: Per-parameter structured error details (validation failures only).
+  artifact: errors/inflammatix-problem-types.yml
+rate_limiting:
+  documented: false
+  signal_headers: []
+  detail: >-
+    No published rate limit and no RateLimit/X-RateLimit headers observed. The hosts
+    sit behind Cloudflare in front of WP Engine, so throttling is enforced but
+    unspecified: a burst of ~12 rapid requests to inflammatix.com HTML pages returned
+    HTTP 429 with no Retry-After. Clients should pace requests and back off on 429.
+caching:
+  detail: >-
+    Cloudflare + WP Engine edge caching is active on both hosts; responses carry
+    `x-cacheable`, `x-cache`, `cf-cache-status` and `x-powered-by: WP Engine`. REST
+    collections return `cache-control: private, no-cache, no-store, must-revalidate`
+    and do not consistently emit ETag/Last-Modified.
+cors:
+  access_control_allow_headers: [Authorization, X-WP-Nonce, Content-Disposition, Content-MD5, Content-Type]
+  access_control_expose_headers: [X-WP-Total, X-WP-TotalPages, Link]
+  detail: >-
+    CORS is configured so browser clients can read the pagination headers; observed
+    live on https://inflammatix.com/wp-json/wp/v2/posts on 2026-08-01.
+cross_links:
+  authentication: authentication/inflammatix-authentication.yml
+  errors: errors/inflammatix-problem-types.yml
+  lifecycle: lifecycle/inflammatix-lifecycle.yml
+  data_model: data-model/inflammatix-data-model.yml
+  conformance: conformance/inflammatix-conformance.yml

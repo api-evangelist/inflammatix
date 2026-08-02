@@ -1,0 +1,69 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Inflammatix Site Content API
+  version: 1.0.0
+extends: openapi/inflammatix-content-openapi.yml
+x-generated: '2026-08-01'
+x-method: generated
+x-source: >-
+  API Evangelist enrichment pipeline. Captures our annotations separately so the
+  contract derived from https://inflammatix.com/wp-json/ stays a faithful mechanical
+  translation of what the provider actually serves.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: inflammatix
+    x-apievangelist-api: inflammatix:site-content
+    x-apievangelist-surface: content
+    x-apievangelist-note: >-
+      This is a corporate website content API, not a clinical or diagnostics product
+      API. Inflammatix publishes no developer interface for the TriVerity Test System
+      or the Myrna instrument.
+    x-artifacts:
+      conventions: conventions/inflammatix-conventions.yml
+      errors: errors/inflammatix-problem-types.yml
+      data_model: data-model/inflammatix-data-model.yml
+      lifecycle: lifecycle/inflammatix-lifecycle.yml
+      conformance: conformance/inflammatix-conformance.yml
+      authentication: authentication/inflammatix-authentication.yml
+      skills: skills/_index.yml
+- target: $.paths['/wp/v2/publication'].get
+  update:
+    x-apievangelist-highlight: true
+    x-apievangelist-note: >-
+      The substantive operation on this API. `publication` is a custom post type
+      registered by Inflammatix, holding its peer-reviewed clinical evidence library
+      (papers, abstracts, posters) behind https://inflammatix.com/evidence/.
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      audit: optional
+- target: $.paths['/wp/v2/publication/{id}'].get
+  update:
+    x-apievangelist-note: Retrieve one publication record, including excerpt, full content and taxonomy terms.
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      audit: optional
+- target: $.paths['/wp/v2/category-publication'].get
+  update:
+    x-apievangelist-note: The Inflammatix-registered taxonomy that classifies the publication library.
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      audit: optional
+- target: $.paths['/wp/v2/posts'].get
+  update:
+    x-apievangelist-note: >-
+      The newsroom stream — press releases, news coverage and machine-learning blog
+      entries. 117 items as observed 2026-08-01 (X-WP-Total).
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      audit: optional
+- target: $.components.securitySchemes.applicationPassword
+  update:
+    x-apievangelist-note: >-
+      Not required for any operation modelled in this contract. Recorded because the
+      site advertises it in its own REST index and it is the only authentication
+      mechanism Inflammatix exposes anywhere.

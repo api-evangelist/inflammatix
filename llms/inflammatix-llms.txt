@@ -1,0 +1,72 @@
+# Inflammatix
+
+> Inflammatix is a molecular diagnostics company in Sunnyvale, California that reads the patient's own immune response to speed decisions in emergency and critical care. Its FDA-cleared TriVerity Test System measures a 29-mRNA host-response panel from whole blood on the benchtop Myrna instrument, returning three machine-learning-derived scores — bacterial infection likelihood, viral infection likelihood, and risk of severe illness within seven days — in about 30 minutes.
+
+Generated: 2026-08-01
+Method: generated (no /llms.txt is published by Inflammatix; probed 2026-08-01, HTTP 404 on inflammatix.com, www.inflammatix.com and support.inflammatix.com)
+Source: API Evangelist enrichment pipeline, from apis.yml and the artifacts in https://github.com/api-evangelist/inflammatix
+
+## Important scope note
+
+Inflammatix publishes **no developer API** for its clinical products. There is no
+patient, sample, order, result or instrument resource on any public surface. The
+TriVerity page advertises that the Myrna instrument supports "multiple LIS
+connectivity options" and remote notification, but no interface specification,
+conformance statement or integration guide is published — whether that is HL7 v2,
+ASTM or a proprietary interface is not disclosed.
+
+The two APIs below are the WordPress REST content APIs the company serves from its
+corporate site and its customer support portal. They are real, anonymously readable,
+and useful for research — they are not clinical interfaces.
+
+## APIs
+
+- [Inflammatix Site Content API](https://inflammatix.com/): WordPress REST content API at https://inflammatix.com/wp-json/wp/v2 — posts, pages, media, taxonomies, site search, and the company's own `publication` custom post type holding its peer-reviewed clinical evidence library.
+- [Inflammatix Support and Training Content API](https://support.inflammatix.com/): WordPress REST content API at https://support.inflammatix.com/wp-json/wp/v2 — support content plus the MemberPress Courses types (`mpcs-course`, `mpcs-lesson`, `mpcs-quiz`) backing the TriVerity/Myrna operator-training curriculum. Catalogue metadata is public; lesson bodies are behind the customer login.
+
+## Specs
+
+- [Site Content OpenAPI 3.1](openapi/inflammatix-content-openapi.yml): 20 operations, derived verbatim from https://inflammatix.com/wp-json/
+- [Support Content OpenAPI 3.1](openapi/inflammatix-support-content-openapi.yml): 26 operations, derived verbatim from https://support.inflammatix.com/wp-json/
+- [Site Content overlay](overlays/inflammatix-content-overlay.yaml)
+- [Support Content overlay](overlays/inflammatix-support-content-overlay.yaml)
+
+## Artifacts
+
+- [Authentication](authentication/inflammatix-authentication.yml): WordPress Application Passwords over HTTP Basic; not required for any modelled operation
+- [Conventions](conventions/inflammatix-conventions.yml): pagination, filtering, sparse fields, error envelope, caching, CORS; no idempotency, no rate-limit headers
+- [Error catalog](errors/inflammatix-problem-types.yml): WordPress `{code, message, data}` envelope — not RFC 9457
+- [Data model](data-model/inflammatix-data-model.yml): entity graph read from each site's own type and taxonomy registries
+- [Lifecycle](lifecycle/inflammatix-lifecycle.yml): namespace-path versioning; no status page, no deprecation policy, no API changelog
+- [Conformance](conformance/inflammatix-conformance.yml): ISO 13485:2016, FDA clearance, California device manufacturing licence; no SOC 2, no OAuth, no FHIR
+- [Domain security](security/inflammatix-domain-security.yml): TLS 1.3 on both hosts, no HSTS, no DNSSEC, no CAA, SPF present, DMARC p=quarantine
+- [Well-known probe](well-known/inflammatix-well-known.yml): every /.well-known/ path 404s on every host
+- [MCP candidate](mcp/inflammatix-mcp.yml): no MCP server exists; a candidate tool list only
+- [Agent skills](skills/_index.yml): three packaged skills grounded in real operationIds
+- [Examples](examples/): live response payloads captured 2026-08-01
+
+## Docs
+
+- [TriVerity Test System](https://inflammatix.com/triverity/)
+- [Clinical evidence and publications](https://inflammatix.com/evidence/)
+- [Product pipeline](https://inflammatix.com/pipeline/)
+- [Education: acute infection, sepsis, immune response, machine learning](https://inflammatix.com/education/)
+- [About, certifications and licences](https://inflammatix.com/about-us/)
+- [Patents](https://inflammatix.com/patents/)
+- [Customer support portal](https://support.inflammatix.com/)
+- [Newsroom](https://inflammatix.com/newsroom/news/)
+- [Press releases](https://inflammatix.com/newsroom/press-releases/)
+- [Contact](https://inflammatix.com/contact-inflammatix/)
+- [Privacy and cookies statement](https://inflammatix.com/privacy-and-cookies-statement/)
+- [Terms and conditions](https://inflammatix.com/terms-and-conditions/)
+
+## What is NOT available
+
+- No developer portal, API reference, getting-started guide, SDK, CLI, or Postman collection
+- No published OpenAPI, AsyncAPI, GraphQL schema, or .proto — probed /openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json, /api-docs, /docs and /redoc on every host, all 404
+- No MCP server and no A2A agent card — /.well-known/agent-card.json and /.well-known/agent.json return 404 on every host
+- No webhooks, event stream, or AsyncAPI document
+- No status page, SLA, changelog, or deprecation policy
+- No security.txt, vulnerability disclosure programme, bug bounty, or trust centre
+- No GitHub organisation and no packages on npm, PyPI, or any other registry
+- No pricing page or API sign-up — the support portal login is for existing customers

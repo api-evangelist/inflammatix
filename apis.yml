@@ -1,18 +1,92 @@
 aid: inflammatix
 name: Inflammatix
-description: 'Inflammatix is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Inflammatix is a molecular diagnostics company headquartered in Sunnyvale,
+  California that reads the patient''s own immune response to speed up decisions in
+  emergency and critical care. Its FDA-cleared TriVerity Test System measures a 29-mRNA
+  host-response panel from whole blood on the benchtop Myrna instrument using RT-LAMP,
+  returning three machine-learning-derived scores — bacterial infection likelihood,
+  viral infection likelihood, and risk of severe illness within seven days — in about
+  30 minutes, with under a minute of no-prep sample handling. The company was co-founded
+  out of Stanford by Tim Sweeney and Purvesh Khatri, is backed by Khosla Ventures,
+  Northpond Ventures, Think.Health Ventures, Iberis Capital, OSF HealthCare and Vesalius
+  BioCapital plus federal funding from NIH, BARDA, DRIVe and DARPA, and holds ISO 13485:2016
+  certification and a State of California medical device manufacturing license. Inflammatix
+  publishes no developer API for its clinical products; the Myrna instrument advertises
+  "multiple LIS connectivity options" and remote notification, but no public interface
+  specification. The machine-readable surfaces it does serve are the WordPress REST
+  content APIs behind inflammatix.com and its customer support/training portal, which
+  expose the company''s peer-reviewed publication library and the TriVerity/Myrna course
+  catalogue as JSON.'
 url: https://raw.githubusercontent.com/api-evangelist/inflammatix/refs/heads/main/apis.yml
+image: https://inflammatix.com/wp-content/uploads/2025/05/logo-revdark-850-1024x242.webp
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment-pipeline
 specificationVersion: '0.20'
 created: '2026-08-01'
 modified: '2026-08-01'
 tags:
 - Company
-apis: []
+- Health
+- Healthcare
+- Diagnostics
+- Medical Devices
+- In Vitro Diagnostics
+- Molecular Diagnostics
+- Sepsis
+- Machine Learning
+- Life Sciences
+- Point of Care
+- Content
+apis:
+- aid: inflammatix:site-content
+  name: Inflammatix Site Content API
+  description: 'The public, anonymously-readable WordPress REST content API served
+    by inflammatix.com. Alongside the standard WordPress collections (posts, pages,
+    media, categories, tags, comments, search) it exposes the company''s own publication
+    custom post type and its category-publication taxonomy — a machine-readable index
+    of the peer-reviewed clinical evidence library behind TriVerity. Derived verbatim
+    from the route-discovery document the site itself publishes at /wp-json/; read
+    access verified live 2026-08-01. Write operations exist but require WordPress Application
+    Password authentication.'
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - Content
+  - Publications
+  - WordPress
+  - Research
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-content-openapi.yml
+  - type: Overlay
+    url: overlays/inflammatix-content-overlay.yaml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+- aid: inflammatix:support-content
+  name: Inflammatix Support and Training Content API
+  description: 'The public, anonymously-readable WordPress REST content API served
+    by support.inflammatix.com, the Inflammatix customer support and TriVerity/Myrna
+    operator-training portal. In addition to the standard WordPress collections it
+    exposes the MemberPress Courses post types (mpcs-course, mpcs-lesson, mpcs-quiz)
+    and their taxonomies, so the training catalogue is machine-readable even though
+    lesson bodies sit behind the customer login. Derived verbatim from the route-discovery
+    document published at /wp-json/; read access verified live 2026-08-01.'
+  humanURL: https://support.inflammatix.com/
+  baseURL: https://support.inflammatix.com/wp-json/wp/v2
+  tags:
+  - Content
+  - Support
+  - Training
+  - WordPress
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-support-content-openapi.yml
+  - type: Overlay
+    url: overlays/inflammatix-support-content-overlay.yaml
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +94,57 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
+  url: https://inflammatix.com/
+- type: Support
+  url: https://support.inflammatix.com/
+- type: Login
+  url: https://support.inflammatix.com/login/
+- type: Blog
+  url: https://inflammatix.com/newsroom/news/
+- type: BlogRSS
+  url: https://inflammatix.com/feed/
+- type: PressReleases
+  url: https://inflammatix.com/newsroom/press-releases/
+- type: Roadmap
+  url: https://inflammatix.com/pipeline/
+- type: Compliance
+  url: https://inflammatix.com/about-us/
+- type: Patents
+  url: https://inflammatix.com/patents/
+- type: Research
+  url: https://inflammatix.com/evidence/
+- type: Careers
+  url: https://inflammatix.com/careers/
+- type: Contact
+  url: https://inflammatix.com/contact-inflammatix/
+- type: PrivacyPolicy
+  url: https://inflammatix.com/privacy-and-cookies-statement/
+- type: TermsOfService
+  url: https://inflammatix.com/terms-and-conditions/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/inflammatix/
+- type: SecondaryMarket
   url: https://forgeglobal.com/inflammatix_stock/
+- type: Authentication
+  url: authentication/inflammatix-authentication.yml
+- type: Conventions
+  url: conventions/inflammatix-conventions.yml
+- type: ErrorCatalog
+  url: errors/inflammatix-problem-types.yml
+- type: DataModel
+  url: data-model/inflammatix-data-model.yml
+- type: Lifecycle
+  url: lifecycle/inflammatix-lifecycle.yml
+- type: Conformance
+  url: conformance/inflammatix-conformance.yml
+- type: DomainSecurity
+  url: security/inflammatix-domain-security.yml
+- type: LLMsTxt
+  url: llms/inflammatix-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-08-01'
+  status: enriched
+  artifacts_added: 22
+  pass: local-v1

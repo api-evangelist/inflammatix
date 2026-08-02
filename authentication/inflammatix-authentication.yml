@@ -1,0 +1,16 @@
+generated: '2026-08-01'
+method: derived
+source: openapi/inflammatix-content-openapi.yml, openapi/inflammatix-support-content-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: applicationPassword
+  type: http
+  scheme: basic
+  description: WordPress Application Passwords, advertised by the site's own REST index (authentication.application-passwords.endpoints.authorization
+    = https://inflammatix.com/wp-admin/authorize-application.php). Required only for write operations
+    and non-public collections; the operations modelled here are anonymously readable.
+  sources:
+  - openapi/inflammatix-content-openapi.yml
+  - openapi/inflammatix-support-content-openapi.yml

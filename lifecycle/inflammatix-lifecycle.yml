@@ -1,0 +1,52 @@
+generated: '2026-08-01'
+method: derived
+source: >-
+  openapi/inflammatix-content-openapi.yml, openapi/inflammatix-support-content-openapi.yml
+  and live probes of inflammatix.com / support.inflammatix.com on 2026-08-01.
+versioning:
+  scheme: namespace-path
+  current: wp/v2
+  discovery: https://inflammatix.com/wp-json/
+  detail: >-
+    The version is the WordPress REST namespace in the URL. The discovery index at
+    /wp-json/ enumerates every namespace a host serves and is the only announcement
+    channel for a version change. Inflammatix publishes no versioning policy of its
+    own for these surfaces.
+  docs: null
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  detail: >-
+    No deprecation policy, no RFC 8594 Sunset/Deprecation header support, and no
+    deprecated operations in either derived contract. Searched inflammatix.com and
+    support.inflammatix.com; nothing published.
+sla:
+  url: null
+  uptime_target: null
+status_page:
+  url: null
+  detail: >-
+    No status page. status.inflammatix.com does not resolve, and no status/uptime
+    page is linked from the site, the support portal, or the newsroom.
+changelog:
+  url: null
+  detail: >-
+    No dated changelog for any API surface. The closest published change stream is
+    the corporate newsroom (https://inflammatix.com/newsroom/news/) and press releases,
+    which cover product and regulatory milestones, not interface changes.
+deprecated_operations: []
+product_lifecycle:
+  note: >-
+    Inflammatix's published forward-looking roadmap is a clinical product pipeline,
+    not an API roadmap.
+  roadmap: https://inflammatix.com/pipeline/
+  regulatory_milestones:
+  - {date: '2025-01', event: FDA marketing authorization granted for the TriVerity Test System.}
+  - {date: '2023', event: FDA Breakthrough Device Designation.}
+  shipping_products: [TriVerity Test cartridge, Myrna Instrument]
+  pipeline_products: [RespVerity, BacVerity]
+gaps:
+- No StatusPage pointer is wired — none exists.
+- No Deprecation pointer is wired — no deprecation policy exists.
+- No ChangeLog pointer is wired — no dated API changelog exists.

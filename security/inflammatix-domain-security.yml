@@ -1,0 +1,21 @@
+generated: '2026-08-01'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: inflammatix.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  9 12:19:51 2026 GMT
+  hsts: false
+- host: support.inflammatix.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 25 20:32:35 2026 GMT
+  hsts: false
+domains:
+- domain: inflammatix.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
