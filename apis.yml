@@ -93,6 +93,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: MCPServer
+  url: mcp/inflammatix-mcp.yml
 - type: Website
   url: https://inflammatix.com/
 - type: Support
