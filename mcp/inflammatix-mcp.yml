@@ -1,23 +1,18 @@
 generated: '2026-08-01'
 method: derived
 status: candidate
-source: >-
-  Derived from openapi/inflammatix-content-openapi.yml and
-  openapi/inflammatix-support-content-openapi.yml.
+source: Derived from openapi/inflammatix-content-openapi.yml and openapi/inflammatix-support-content-openapi.yml.
 searched:
   result: none
-  detail: >-
-    No official or third-party MCP server exists for Inflammatix. Searched the
-    provider site, the support portal, npm (@modelcontextprotocol and "inflammatix"),
-    PyPI, and the GitHub API — Inflammatix has no GitHub organisation and no public
-    repositories. /.well-known/oauth-authorization-server and
+  detail: No official or third-party MCP server exists for Inflammatix. Searched the provider site, the
+    support portal, npm (@modelcontextprotocol and "inflammatix"), PyPI, and the GitHub API — Inflammatix
+    has no GitHub organisation and no public repositories. /.well-known/oauth-authorization-server and
     /.well-known/oauth-protected-resource return 404 on every host.
   probed: '2026-08-01'
-apis_yml_pointer: >-
-  DELIBERATELY NOT WIRED. No `MCPServer` pointer is emitted in apis.yml because no
-  MCP server is genuinely present. This file records a candidate design, not a
-  deployed surface; wiring the pointer would award the mcp_server_present and
-  agent-readiness mcp_server checks for something that does not exist.
+apis_yml_pointer: DELIBERATELY NOT WIRED. No `MCPServer` pointer is emitted in apis.yml because no MCP
+  server is genuinely present. This file records a candidate design, not a deployed surface; wiring the
+  pointer would award the mcp_server_present and agent-readiness mcp_server checks for something that
+  does not exist.
 server:
   name: inflammatix
   transport: http
@@ -34,7 +29,8 @@ tools:
   description: List the taxonomy terms that classify the publication library.
   source_operation: openapi/inflammatix-content-openapi.yml#listPublicationCategories
 - name: search_inflammatix_news
-  description: Search Inflammatix press releases, news coverage and ML blog posts by date, category or tag.
+  description: Search Inflammatix press releases, news coverage and ML blog posts by date, category or
+    tag.
   source_operation: openapi/inflammatix-content-openapi.yml#listPosts
 - name: get_inflammatix_news_item
   description: Retrieve one newsroom item in full.
@@ -52,6 +48,15 @@ tools:
   description: Search the Inflammatix support portal across support pages and training content.
   source_operation: openapi/inflammatix-support-content-openapi.yml#listSearch
 notes:
-- Every candidate tool inherits its real input schema from the backing operation's `parameters` block in the referenced contract.
-- All candidate tools are read-only. No write operation is modelled in either contract, so an implementation would need no consequential-action guardrails.
-- No tool crosswalk artifact is emitted: a crosswalk binds a real MCP tool set to REST operations, and there is no real tool set to bind.
+- Every candidate tool inherits its real input schema from the backing operation's `parameters` block
+  in the referenced contract.
+- All candidate tools are read-only. No write operation is modelled in either contract, so an implementation
+  would need no consequential-action guardrails.
+- No tool crosswalk artifact is emitted: a crosswalk binds a real MCP tool set to REST operations, and
+    there is no real tool set to bind.
+deployment:
+  mode: none
+  verified: derived
+  tools: 9
+  checked: '2026-08-12'
+  source: catalog MCP census
