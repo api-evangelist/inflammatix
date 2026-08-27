@@ -53,51 +53,243 @@ tags_raw:
 - Point of Care
 - Content
 apis:
-- aid: inflammatix:site-content
-  name: Inflammatix Site Content API
-  description: 'The public, anonymously-readable WordPress REST content API served
-    by inflammatix.com. Alongside the standard WordPress collections (posts, pages,
-    media, categories, tags, comments, search) it exposes the company''s own publication
-    custom post type and its category-publication taxonomy — a machine-readable index
-    of the peer-reviewed clinical evidence library behind TriVerity. Derived verbatim
-    from the route-discovery document the site itself publishes at /wp-json/; read
-    access verified live 2026-08-01. Write operations exist but require WordPress Application
-    Password authentication.'
+- aid: inflammatix:inflammatix-categories-api
+  name: Inflammatix Categories API
+  description: The Categories API from Inflammatix — 2 operation(s) for categories.
   humanURL: https://inflammatix.com/
   baseURL: https://inflammatix.com/wp-json/wp/v2
   tags:
-  - Content
-  - Publications
-  - WordPress
-  - Research
+  - Categories
   properties:
   - type: OpenAPI
-    url: openapi/inflammatix-content-openapi.yml
-  - type: Overlay
-    url: overlays/inflammatix-content-overlay.yaml
+    url: openapi/inflammatix-categories-api-openapi.yml
   - type: Examples
     url: examples/inflammatix-publication-list.json
-- aid: inflammatix:support-content
-  name: Inflammatix Support and Training Content API
-  description: 'The public, anonymously-readable WordPress REST content API served
-    by support.inflammatix.com, the Inflammatix customer support and TriVerity/Myrna
-    operator-training portal. In addition to the standard WordPress collections it
-    exposes the MemberPress Courses post types (mpcs-course, mpcs-lesson, mpcs-quiz)
-    and their taxonomies, so the training catalogue is machine-readable even though
-    lesson bodies sit behind the customer login. Derived verbatim from the route-discovery
-    document published at /wp-json/; read access verified live 2026-08-01.'
-  humanURL: https://support.inflammatix.com/
-  baseURL: https://support.inflammatix.com/wp-json/wp/v2
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-comments-api
+  name: Inflammatix Comments API
+  description: The Comments API from Inflammatix — 2 operation(s) for comments.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
   tags:
-  - Content
-  - Support
-  - Training
-  - WordPress
+  - Comments
   properties:
   - type: OpenAPI
-    url: openapi/inflammatix-support-content-openapi.yml
-  - type: Overlay
-    url: overlays/inflammatix-support-content-overlay.yaml
+    url: openapi/inflammatix-comments-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-coursecategories-api
+  name: Inflammatix Course Categories API
+  description: The CourseCategories API from Inflammatix — 2 operation(s) for coursecategories.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - CourseCategories
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-coursecategories-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-courses-api
+  name: Inflammatix Courses API
+  description: The Courses API from Inflammatix — 2 operation(s) for courses.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - Courses
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-courses-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-coursetags-api
+  name: Inflammatix Course Tags API
+  description: The CourseTags API from Inflammatix — 2 operation(s) for coursetags.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - CourseTags
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-coursetags-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-lessons-api
+  name: Inflammatix Lessons API
+  description: The Lessons API from Inflammatix — 2 operation(s) for lessons.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - Lessons
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-lessons-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-media-api
+  name: Inflammatix Media API
+  description: The Media API from Inflammatix — 2 operation(s) for media.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - Media
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-media-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-pages-api
+  name: Inflammatix Pages API
+  description: The Pages API from Inflammatix — 2 operation(s) for pages.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - Pages
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-pages-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-posts-api
+  name: Inflammatix Posts API
+  description: The Posts API from Inflammatix — 2 operation(s) for posts.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - Posts
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-posts-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-publicationcategories-api
+  name: Inflammatix Publication Categories API
+  description: >-
+    The PublicationCategories API from Inflammatix — 2 operation(s) for publicationcategories.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - PublicationCategories
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-publicationcategories-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-publications-api
+  name: Inflammatix Publications API
+  description: The Publications API from Inflammatix — 2 operation(s) for publications.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - Publications
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-publications-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-quizzes-api
+  name: Inflammatix Quizzes API
+  description: The Quizzes API from Inflammatix — 2 operation(s) for quizzes.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - Quizzes
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-quizzes-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-search-api
+  name: Inflammatix Search API
+  description: The Search API from Inflammatix — 1 operation(s) for search.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-search-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-statuses-api
+  name: Inflammatix Statuses API
+  description: The Statuses API from Inflammatix — 1 operation(s) for statuses.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - Statuses
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-statuses-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-tags-api
+  name: Inflammatix Tags API
+  description: The Tags API from Inflammatix — 2 operation(s) for tags.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-tags-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-taxonomies-api
+  name: Inflammatix Taxonomies API
+  description: The Taxonomies API from Inflammatix — 1 operation(s) for taxonomies.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - Taxonomies
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-taxonomies-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-types-api
+  name: Inflammatix Types API
+  description: The Types API from Inflammatix — 1 operation(s) for types.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - Types
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-types-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
   - type: Examples
     url: examples/inflammatix-support-courses.json
 maintainers:
@@ -106,6 +298,10 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/inflammatix-content-overlay.yaml
+- type: Overlay
+  url: overlays/inflammatix-support-content-overlay.yaml
 - type: MCPServer
   url: mcp/inflammatix-mcp.yml
 - type: Website
