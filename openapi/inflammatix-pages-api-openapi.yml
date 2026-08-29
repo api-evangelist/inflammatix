@@ -1,0 +1,366 @@
+openapi: 3.2.0
+info:
+  title: Inflammatix Pages API
+  version: wp/v2
+  x-derivation-method: route-discovery
+  x-refined-note:
+  - x-derived-from differs across the merged source definitions and was not carried
+  - x-evidence differs across the merged source definitions and was not carried
+  description: 'Operations tagged Pages across 2 of this provider''s published API definitions: inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://inflammatix.com/wp-json
+  description: Production
+- url: https://support.inflammatix.com/wp-json
+  description: Production
+tags:
+- name: Pages
+paths:
+  /wp/v2/pages:
+    get:
+      operationId: listPages
+      summary: List pages
+      description: Derived from the WordPress REST API route discovery document published at https://inflammatix.com/wp-json/ . Anonymous read access verified live 2026-08-01.
+      tags:
+      - Pages
+      parameters:
+      - name: after
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Limit response to posts published after a given ISO8601 compliant date.
+      - name: author
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Limit result set to posts assigned to specific authors.
+      - name: author_exclude
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Ensure result set excludes posts assigned to specific authors.
+      - name: before
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Limit response to posts published before a given ISO8601 compliant date.
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      - name: exclude
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Ensure result set excludes specific IDs.
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Limit result set to specific IDs.
+      - name: menu_order
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Limit result set to posts with a specific menu_order value.
+      - name: modified_after
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Limit response to posts modified after a given ISO8601 compliant date.
+      - name: modified_before
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Limit response to posts modified before a given ISO8601 compliant date.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset the result set by a specific number of items.
+      - name: order
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+        description: Order sort attribute ascending or descending.
+      - name: orderby
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - author
+          - date
+          - id
+          - include
+          - modified
+          - parent
+          - relevance
+          - slug
+          - include_slugs
+          - title
+          - menu_order
+          default: date
+        description: Sort collection by post attribute.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+        description: Current page of the collection.
+      - name: parent
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Limit result set to items with particular parent IDs.
+      - name: parent_exclude
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Limit result set to all items except those of a particular parent ID.
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 100
+        description: Maximum number of items to be returned in result set.
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Limit results to those matching a string.
+      - name: search_columns
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            enum:
+            - post_title
+            - post_content
+            - post_excerpt
+            type: string
+        description: Array of column names to be searched.
+      - name: search_semantics
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - exact
+        description: How to interpret the search input.
+      - name: slug
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        description: Limit result set to posts with one or more specific slugs.
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: array
+          default: publish
+          items:
+            enum:
+            - publish
+            - future
+            - draft
+            - pending
+            - private
+            - trash
+            - auto-draft
+            - inherit
+            - request-pending
+            - request-confirmed
+            - request-failed
+            - request-completed
+            - email_sent
+            - email_failed
+            - email_scheduled
+            - wp_stream_enabled
+            - wp_stream_disabled
+            - any
+            type: string
+        description: Limit result set to posts assigned one or more statuses.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+          headers:
+            X-WP-Total:
+              description: Total number of items in the collection.
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages in the collection.
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel=next / rel=prev).
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    servers:
+    - url: https://inflammatix.com/wp-json
+      description: Production
+  /wp/v2/pages/{id}:
+    get:
+      operationId: getPage
+      summary: Retrieve a single page by id
+      description: Derived from the WordPress REST API route discovery document published at https://inflammatix.com/wp-json/ . Anonymous read access verified live 2026-08-01.
+      tags:
+      - Pages
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique identifier for the page.
+        schema:
+          type: integer
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      - name: excerpt_length
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Override the default excerpt length.
+      - name: password
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The password for the post if it is password protected.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    servers:
+    - url: https://inflammatix.com/wp-json
+      description: Production
+components:
+  responses:
+    NotFound:
+      description: No matching resource (rest_post_invalid_id / rest_no_route).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid parameter (rest_invalid_param).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      description: WordPress REST API error envelope (observed live 2026-08-01).
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_post_invalid_id.
+        message:
+          type: string
+          description: Human-readable error message.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: HTTP status code.
+            params:
+              type: object
+              description: Per-parameter validation messages.
+            details:
+              type: object
+              description: Per-parameter structured error details.
+      required:
+      - code
+      - message
+      - data
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: WordPress Application Passwords, advertised by the site's own REST index (authentication.application-passwords.endpoints.authorization = https://inflammatix.com/wp-admin/authorize-application.php). Required only for write operations and non-public collections; the operations modelled here are anonymously readable.
+x-refined-from:
+- inflammatix-content-openapi.yml
+- inflammatix-support-content-openapi.yml

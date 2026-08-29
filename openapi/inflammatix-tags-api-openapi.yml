@@ -1,0 +1,246 @@
+openapi: 3.2.0
+info:
+  title: Inflammatix Tags API
+  version: wp/v2
+  x-derivation-method: route-discovery
+  x-refined-note:
+  - x-derived-from differs across the merged source definitions and was not carried
+  - x-evidence differs across the merged source definitions and was not carried
+  description: 'Operations tagged Tags across 2 of this provider''s published API definitions: inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://inflammatix.com/wp-json
+  description: Production
+- url: https://support.inflammatix.com/wp-json
+  description: Production
+tags:
+- name: Tags
+paths:
+  /wp/v2/tags:
+    get:
+      operationId: listTags
+      summary: List tags
+      description: Derived from the WordPress REST API route discovery document published at https://inflammatix.com/wp-json/ . Anonymous read access verified live 2026-08-01.
+      tags:
+      - Tags
+      parameters:
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      - name: exclude
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Ensure result set excludes specific IDs.
+      - name: hide_empty
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        description: Whether to hide terms not assigned to any posts.
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Limit result set to specific IDs.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Offset the result set by a specific number of items.
+      - name: order
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: asc
+        description: Order sort attribute ascending or descending.
+      - name: orderby
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - id
+          - include
+          - name
+          - slug
+          - include_slugs
+          - term_group
+          - description
+          - count
+          default: name
+        description: Sort collection by term attribute.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+        description: Current page of the collection.
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 100
+        description: Maximum number of items to be returned in result set.
+      - name: post
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: null
+        description: Limit result set to terms assigned to a specific post.
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Limit results to those matching a string.
+      - name: slug
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        description: Limit result set to terms with one or more specific slugs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+          headers:
+            X-WP-Total:
+              description: Total number of items in the collection.
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages in the collection.
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel=next / rel=prev).
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    servers:
+    - url: https://inflammatix.com/wp-json
+      description: Production
+  /wp/v2/tags/{id}:
+    get:
+      operationId: getTag
+      summary: Retrieve a single tag by id
+      description: Derived from the WordPress REST API route discovery document published at https://inflammatix.com/wp-json/ . Anonymous read access verified live 2026-08-01.
+      tags:
+      - Tags
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique identifier for the tag.
+        schema:
+          type: integer
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    servers:
+    - url: https://inflammatix.com/wp-json
+      description: Production
+components:
+  responses:
+    NotFound:
+      description: No matching resource (rest_post_invalid_id / rest_no_route).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid parameter (rest_invalid_param).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      description: WordPress REST API error envelope (observed live 2026-08-01).
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_post_invalid_id.
+        message:
+          type: string
+          description: Human-readable error message.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: HTTP status code.
+            params:
+              type: object
+              description: Per-parameter validation messages.
+            details:
+              type: object
+              description: Per-parameter structured error details.
+      required:
+      - code
+      - message
+      - data
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: WordPress Application Passwords, advertised by the site's own REST index (authentication.application-passwords.endpoints.authorization = https://inflammatix.com/wp-admin/authorize-application.php). Required only for write operations and non-public collections; the operations modelled here are anonymously readable.
+x-refined-from:
+- inflammatix-content-openapi.yml
+- inflammatix-support-content-openapi.yml

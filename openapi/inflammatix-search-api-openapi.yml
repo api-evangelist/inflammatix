@@ -1,0 +1,174 @@
+openapi: 3.2.0
+info:
+  title: Inflammatix Search API
+  version: wp/v2
+  x-derivation-method: route-discovery
+  x-refined-note:
+  - x-derived-from differs across the merged source definitions and was not carried
+  - x-evidence differs across the merged source definitions and was not carried
+  description: 'Operations tagged Search across 2 of this provider''s published API definitions: inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://inflammatix.com/wp-json
+  description: Production
+- url: https://support.inflammatix.com/wp-json
+  description: Production
+tags:
+- name: Search
+paths:
+  /wp/v2/search:
+    get:
+      operationId: listSearch
+      summary: List search
+      description: Derived from the WordPress REST API route discovery document published at https://inflammatix.com/wp-json/ . Anonymous read access verified live 2026-08-01.
+      tags:
+      - Search
+      parameters:
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      - name: exclude
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Ensure result set excludes specific IDs.
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+        description: Limit result set to specific IDs.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+        description: Current page of the collection.
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 100
+        description: Maximum number of items to be returned in result set.
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Limit results to those matching a string.
+      - name: subtype
+        in: query
+        required: false
+        schema:
+          type: array
+          default: any
+          items:
+            enum:
+            - post
+            - page
+            - publication
+            - category
+            - post_tag
+            - category-publication
+            - any
+            type: string
+        description: Limit results to items of one or more object subtypes.
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - post
+          - term
+          - post-format
+          default: post
+        description: Limit results to items of an object type.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+          headers:
+            X-WP-Total:
+              description: Total number of items in the collection.
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages in the collection.
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel=next / rel=prev).
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    servers:
+    - url: https://inflammatix.com/wp-json
+      description: Production
+components:
+  schemas:
+    Error:
+      type: object
+      description: WordPress REST API error envelope (observed live 2026-08-01).
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_post_invalid_id.
+        message:
+          type: string
+          description: Human-readable error message.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: HTTP status code.
+            params:
+              type: object
+              description: Per-parameter validation messages.
+            details:
+              type: object
+              description: Per-parameter structured error details.
+      required:
+      - code
+      - message
+      - data
+  responses:
+    BadRequest:
+      description: Invalid parameter (rest_invalid_param).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: WordPress Application Passwords, advertised by the site's own REST index (authentication.application-passwords.endpoints.authorization = https://inflammatix.com/wp-admin/authorize-application.php). Required only for write operations and non-public collections; the operations modelled here are anonymously readable.
+x-refined-from:
+- inflammatix-content-openapi.yml
+- inflammatix-support-content-openapi.yml

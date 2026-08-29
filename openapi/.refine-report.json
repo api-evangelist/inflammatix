@@ -1,0 +1,48 @@
+{
+  "provider": "inflammatix",
+  "sources": [
+    "inflammatix-content-openapi.yml",
+    "inflammatix-support-content-openapi.yml"
+  ],
+  "outputs": [
+    "inflammatix-categories-api-openapi.yml",
+    "inflammatix-comments-api-openapi.yml",
+    "inflammatix-media-api-openapi.yml",
+    "inflammatix-pages-api-openapi.yml",
+    "inflammatix-posts-api-openapi.yml",
+    "inflammatix-publicationcategories-api-openapi.yml",
+    "inflammatix-publications-api-openapi.yml",
+    "inflammatix-search-api-openapi.yml",
+    "inflammatix-statuses-api-openapi.yml",
+    "inflammatix-tags-api-openapi.yml",
+    "inflammatix-taxonomies-api-openapi.yml",
+    "inflammatix-types-api-openapi.yml",
+    "inflammatix-coursecategories-api-openapi.yml",
+    "inflammatix-coursetags-api-openapi.yml",
+    "inflammatix-courses-api-openapi.yml",
+    "inflammatix-lessons-api-openapi.yml",
+    "inflammatix-quizzes-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/inflammatix-content-openapi.yml",
+    "archived openapi/inflammatix-support-content-openapi.yml"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "inflammatix-content-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "inflammatix-support-content-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tag 'Categories' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
+    "tag 'Comments' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
+    "tag 'Media' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
+    "tag 'Pages' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
+    "tag 'Posts' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
+    "tag 'Search' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
+    "tag 'Statuses' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
+    "tag 'Tags' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
+    "tag 'Taxonomies' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
+    "tag 'Types' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
+    "apis.yml register: written (+17 apis, 17 total)"
+  ],
+  "skipped": []
+}
