@@ -18,6 +18,9 @@ description: 'Inflammatix is a molecular diagnostics company headquartered in Su
   expose the company''s peer-reviewed publication library and the TriVerity/Myrna course
   catalogue as JSON.'
 url: https://raw.githubusercontent.com/api-evangelist/inflammatix/refs/heads/main/apis.yml
+x-api-posture: no-product-api
+x-api-posture-basis: observed
+x-api-posture-note: "Inflammatix publishes no developer API for its clinical products; the Myrna instrument advertises 'multiple LIS connectivity options' and remote notification, but no public interface specification."
 deliveryModel:
   model: saas
   open_source: false
