@@ -102,6 +102,8 @@ apis:
   humanURL: https://inflammatix.com/
   baseURL: https://inflammatix.com/wp-json/wp/v2
   tags:
+  - Course Categories
+  tags_raw:
   - CourseCategories
   properties:
   - type: OpenAPI
@@ -257,6 +259,8 @@ apis:
   humanURL: https://inflammatix.com/
   baseURL: https://inflammatix.com/wp-json/wp/v2
   tags:
+  - Status
+  tags_raw:
   - Statuses
   properties:
   - type: OpenAPI
@@ -285,6 +289,8 @@ apis:
   humanURL: https://inflammatix.com/
   baseURL: https://inflammatix.com/wp-json/wp/v2
   tags:
+  - taxonomies
+  tags_raw:
   - Taxonomies
   properties:
   - type: OpenAPI
