@@ -109,22 +109,6 @@ apis:
     url: examples/inflammatix-publication-list.json
   - type: Examples
     url: examples/inflammatix-support-courses.json
-- aid: inflammatix:inflammatix-coursecategories-api
-  name: Inflammatix Course Categories API
-  description: The CourseCategories API from Inflammatix — 2 operation(s) for coursecategories.
-  humanURL: https://inflammatix.com/
-  baseURL: https://inflammatix.com/wp-json/wp/v2
-  tags:
-  - Course Categories
-  tags_raw:
-  - CourseCategories
-  properties:
-  - type: OpenAPI
-    url: openapi/inflammatix-coursecategories-api-openapi.yml
-  - type: Examples
-    url: examples/inflammatix-publication-list.json
-  - type: Examples
-    url: examples/inflammatix-support-courses.json
 - aid: inflammatix:inflammatix-courses-api
   name: Inflammatix Courses API
   description: The Courses API from Inflammatix — 2 operation(s) for courses.
@@ -322,6 +306,20 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/inflammatix-types-api-openapi.yml
+  - type: Examples
+    url: examples/inflammatix-publication-list.json
+  - type: Examples
+    url: examples/inflammatix-support-courses.json
+- aid: inflammatix:inflammatix-course-categories-api
+  name: Inflammatix Course Categories API
+  description: The Course Categories API from Inflammatix — 2 operation(s) for course categories.
+  humanURL: https://inflammatix.com/
+  baseURL: https://inflammatix.com/wp-json/wp/v2
+  tags:
+  - Course Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/inflammatix-course-categories-api-openapi.yml
   - type: Examples
     url: examples/inflammatix-publication-list.json
   - type: Examples
