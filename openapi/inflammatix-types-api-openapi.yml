@@ -62,6 +62,13 @@ paths:
     - url: https://inflammatix.com/wp-json
       description: Production
 components:
+  responses:
+    BadRequest:
+      description: Invalid parameter (rest_invalid_param).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -89,13 +96,6 @@ components:
       - code
       - message
       - data
-  responses:
-    BadRequest:
-      description: Invalid parameter (rest_invalid_param).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     applicationPassword:
       type: http

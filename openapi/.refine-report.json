@@ -1,8 +1,8 @@
 {
   "provider": "inflammatix",
   "sources": [
-    "inflammatix-content-openapi.yml",
-    "inflammatix-support-content-openapi.yml"
+    "_ae-authored/inflammatix-content-openapi.yml",
+    "_ae-authored/inflammatix-support-content-openapi.yml"
   ],
   "outputs": [
     "inflammatix-categories-api-openapi.yml",
@@ -24,12 +24,12 @@
     "inflammatix-quizzes-api-openapi.yml"
   ],
   "archived": [
-    "archived openapi/inflammatix-content-openapi.yml",
-    "archived openapi/inflammatix-support-content-openapi.yml"
+    "deleted 1 superseded output(s) from the previous generation"
   ],
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "inflammatix-content-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "inflammatix-support-content-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "tag 'Categories' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
@@ -42,7 +42,26 @@
     "tag 'Tags' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
     "tag 'Taxonomies' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
     "tag 'Types' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
-    "apis.yml register: written (+17 apis, 17 total)"
+    "superseded outputs removed: inflammatix-course-categories-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 17 total)"
   ],
-  "skipped": []
+  "skipped": [
+    "inflammatix-categories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-comments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-course-categories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-courses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-coursetags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-lessons-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-media-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-pages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-posts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-publicationcategories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-publications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-quizzes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-statuses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-taxonomies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "inflammatix-types-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

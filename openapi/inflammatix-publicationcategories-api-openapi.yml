@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Inflammatix Site Content API (WordPress REST) Publication Categories API
+  title: Inflammatix Site Content API (WordPress REST) Publication…
   version: wp/v2
-  description: 'The public, anonymously-readable content API exposed by inflammatix.com. Inflammatix is a molecular-diagnostics company (TriVerity Test System, Myrna instrument) and publishes no developer API for its clinical products; this contract is the read-only content surface its WordPress-backed corporate site exposes at /wp-json/wp/v2, including the company''s own `publication` custom post type - the machine-readable index of its peer-reviewed clinical evidence library. DERIVED mechanically from the provider''s own route-discovery document: every path, method, and parameter below is copied verbatim from https://inflammatix.com/wp-json/ . Write operations exist on the live host but require authentication and are deliberately not modelled here.'
+  description: The public, anonymously-readable content API exposed by inflammatix.com.
   contact:
     name: Inflammatix
     url: https://inflammatix.com/contact-inflammatix/

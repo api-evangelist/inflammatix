@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Inflammatix Support & Training Content API (WordPress REST) Course Tags API
+  title: Inflammatix Support & Training Content API (WordPress REST)…
   version: wp/v2
-  description: 'The public, anonymously-readable content API exposed by support.inflammatix.com - the Inflammatix customer support and TriVerity/Myrna operator-training portal. Alongside the standard WordPress content collections it exposes the MemberPress Courses post types (`mpcs-course`, `mpcs-lesson`, `mpcs-quiz`) that back the Myrna and TriVerity training curriculum, so the course catalogue is machine-readable even though lesson bodies sit behind the customer login. DERIVED mechanically from the provider''s own route-discovery document: every path, method, and parameter below is copied verbatim from https://support.inflammatix.com/wp-json/ . Write operations exist on the live host but require authentication and are deliberately not modelled here.'
+  description: The public, anonymously-readable content API exposed by support.inflammatix.com - the Inflammatix customer support and TriVerity/Myrna operator-training portal.
   contact:
     name: Inflammatix
     url: https://support.inflammatix.com/

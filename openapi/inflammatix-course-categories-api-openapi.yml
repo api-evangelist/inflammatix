@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Inflammatix Support & Training Content API (WordPress REST) Course Categories API
+  title: Inflammatix Support & Training Content API (WordPress REST)…
   version: wp/v2
-  description: 'The public, anonymously-readable content API exposed by support.inflammatix.com - the Inflammatix customer support and TriVerity/Myrna operator-training portal. Alongside the standard WordPress content collections it exposes the MemberPress Courses post types (`mpcs-course`, `mpcs-lesson`, `mpcs-quiz`) that back the Myrna and TriVerity training curriculum, so the course catalogue is machine-readable even though lesson bodies sit behind the customer login. DERIVED mechanically from the provider''s own route-discovery document: every path, method, and parameter below is copied verbatim from https://support.inflammatix.com/wp-json/ . Write operations exist on the live host but require authentication and are deliberately not modelled here.'
+  description: The public, anonymously-readable content API exposed by support.inflammatix.com - the Inflammatix customer support and TriVerity/Myrna operator-training portal.
   contact:
     name: Inflammatix
     url: https://support.inflammatix.com/
@@ -17,7 +17,7 @@ servers:
 - url: https://support.inflammatix.com/wp-json
   description: Production
 tags:
-- name: CourseCategories
+- name: Course Categories
 paths:
   /wp/v2/mpcs-course-categories:
     get:
@@ -25,7 +25,7 @@ paths:
       summary: List coursecategories
       description: Derived from the WordPress REST API route discovery document published at https://support.inflammatix.com/wp-json/ . Anonymous read access verified live 2026-08-01.
       tags:
-      - CourseCategories
+      - Course Categories
       parameters:
       - name: context
         in: query
@@ -163,7 +163,7 @@ paths:
       summary: Retrieve a single coursecategory by id
       description: Derived from the WordPress REST API route discovery document published at https://support.inflammatix.com/wp-json/ . Anonymous read access verified live 2026-08-01.
       tags:
-      - CourseCategories
+      - Course Categories
       parameters:
       - name: id
         in: path
