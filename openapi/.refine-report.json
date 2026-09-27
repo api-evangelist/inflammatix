@@ -1,67 +1,33 @@
 {
   "provider": "inflammatix",
   "sources": [
-    "_ae-authored/inflammatix-content-openapi.yml",
-    "_ae-authored/inflammatix-support-content-openapi.yml"
-  ],
-  "outputs": [
-    "inflammatix-categories-api-openapi.yml",
-    "inflammatix-comments-api-openapi.yml",
-    "inflammatix-media-api-openapi.yml",
-    "inflammatix-pages-api-openapi.yml",
-    "inflammatix-posts-api-openapi.yml",
-    "inflammatix-publicationcategories-api-openapi.yml",
-    "inflammatix-publications-api-openapi.yml",
-    "inflammatix-search-api-openapi.yml",
-    "inflammatix-statuses-api-openapi.yml",
-    "inflammatix-tags-api-openapi.yml",
-    "inflammatix-taxonomies-api-openapi.yml",
-    "inflammatix-types-api-openapi.yml",
-    "inflammatix-coursecategories-api-openapi.yml",
-    "inflammatix-coursetags-api-openapi.yml",
+    "inflammatix-course-categories-api-openapi.yml",
     "inflammatix-courses-api-openapi.yml",
+    "inflammatix-coursetags-api-openapi.yml",
     "inflammatix-lessons-api-openapi.yml",
     "inflammatix-quizzes-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
+  "outputs": [
+    "inflammatix-course-categories-api-openapi.yml",
+    "inflammatix-courses-api-openapi.yml",
+    "inflammatix-coursetags-api-openapi.yml",
+    "inflammatix-lessons-api-openapi.yml",
+    "inflammatix-quizzes-api-openapi.yml"
   ],
+  "archived": [],
   "errors": [],
-  "warnings": [],
-  "notes": [
-    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
-    "inflammatix-content-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "inflammatix-support-content-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tag 'Categories' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
-    "tag 'Comments' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
-    "tag 'Media' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
-    "tag 'Pages' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
-    "tag 'Posts' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
-    "tag 'Search' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
-    "tag 'Statuses' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
-    "tag 'Tags' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
-    "tag 'Taxonomies' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
-    "tag 'Types' spans 2 source specs (inflammatix-content-openapi.yml, inflammatix-support-content-openapi.yml): per-path servers applied",
-    "superseded outputs removed: inflammatix-course-categories-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 17 total)"
+  "warnings": [
+    "inflammatix-course-categories-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /wp/v2/mpcs-course-categories get, /wp/v2/mpcs-course-categories/{id} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "inflammatix-courses-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /wp/v2/mpcs-course get, /wp/v2/mpcs-course/{id} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "inflammatix-coursetags-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /wp/v2/mpcs-course-tags get, /wp/v2/mpcs-course-tags/{id} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "inflammatix-lessons-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /wp/v2/mpcs-lesson get, /wp/v2/mpcs-lesson/{id} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "inflammatix-quizzes-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /wp/v2/mpcs-quiz get, /wp/v2/mpcs-quiz/{id} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
   ],
-  "skipped": [
-    "inflammatix-categories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-comments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-course-categories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-courses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-coursetags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-lessons-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-media-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-pages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-posts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-publicationcategories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-publications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-quizzes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-statuses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-taxonomies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "inflammatix-types-api-openapi.yml: previously refined output, superseded by openapi/_original/"
-  ]
+  "notes": [
+    "inflammatix-content-openapi.yml: WordPress site /wp-json spec, not split (roadmap#484)",
+    "inflammatix-support-content-openapi.yml: WordPress site /wp-json spec, not split (roadmap#484)",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "apis.yml register: written (+1 apis, 2 total)"
+  ],
+  "skipped": []
 }

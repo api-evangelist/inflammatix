@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Inflammatix Support & Training Content API (WordPress REST)…
+  title: Inflammatix Support & Training Content API (WordPress…
   version: wp/v2
   description: The public, anonymously-readable content API exposed by support.inflammatix.com - the Inflammatix customer support and TriVerity/Myrna operator-training portal.
   contact:
@@ -195,14 +195,14 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    NotFound:
-      description: No matching resource (rest_post_invalid_id / rest_no_route).
+    BadRequest:
+      description: Invalid parameter (rest_invalid_param).
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid parameter (rest_invalid_param).
+    NotFound:
+      description: No matching resource (rest_post_invalid_id / rest_no_route).
       content:
         application/json:
           schema:
