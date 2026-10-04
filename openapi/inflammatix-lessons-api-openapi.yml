@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Inflammatix Support & Training Content API (WordPress……
+  title: Inflammatix Support & Training Content API (WordPress………
   version: wp/v2
   description: The public, anonymously-readable content API exposed by support.inflammatix.com - the Inflammatix customer support and TriVerity/Myrna operator-training portal.
   contact:
