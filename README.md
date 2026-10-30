@@ -64,63 +64,110 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Inflammatix is a molecular diagnostics company in Sunnyvale, California that reads the
-patient's own immune response to speed decisions in emergency and critical care. Its
-FDA-cleared TriVerity Test System measures a 29-mRNA host-response panel from whole
-blood on the benchtop Myrna instrument using RT-LAMP, returning three
-machine-learning-derived scores — bacterial infection likelihood, viral infection
-likelihood, and risk of severe illness within seven days — in about 30 minutes.
+Inflammatix is a molecular diagnostics company headquartered in Sunnyvale, California that reads the patient's own immune response to speed up decisions in emergency and critical care. Its FDA-cleared TriVerity Test System measures a 29-mRNA host-response panel from whole blood on the benchtop Myrna instrument using RT-LAMP, returning three machine-learning-derived scores — bacterial infection likelihood, viral infection likelihood, and risk of severe illness within seven days — in about 30 minutes, with under a minute of no-prep sample handling. The company was co-founded out of Stanford by Tim Sweeney and Purvesh Khatri, is backed by Khosla Ventures, Northpond Ventures, Think.Health Ventures, Iberis Capital, OSF HealthCare and Vesalius BioCapital plus federal funding from NIH, BARDA, DRIVe and DARPA, and holds ISO 13485:2016 certification and a State of California medical device manufacturing license. Inflammatix publishes no developer API for its clinical products; the Myrna instrument advertises "multiple LIS connectivity options" and remote notification, but no public interface specification. The machine-readable surfaces it does serve are the WordPress REST content APIs behind inflammatix.com and its customer support/training portal, which expose the company's peer-reviewed publication library and the TriVerity/Myrna course catalogue as JSON.
 
-- Website: https://inflammatix.com/
-- Support portal: https://support.inflammatix.com/
-- Secondary market listing: https://forgeglobal.com/inflammatix_stock/
+**Areas:** Company · Health · Healthcare · Diagnostics · Medical Devices · In Vitro Diagnostics · Molecular Diagnostics · Sepsis · Machine Learning · Life Sciences · Point of Care · Content
 
-## API surface
+## Inflammatix on APIs.io
 
-**Inflammatix publishes no developer API for its clinical products.** There is no
-patient, sample, order, result or instrument resource anywhere public. The TriVerity
-page advertises that the Myrna instrument supports "multiple LIS connectivity options"
-and remote notification, but no interface specification, conformance statement or
-integration guide is published — whether that is HL7 v2, ASTM or a proprietary
-interface is not disclosed. That undocumented instrument-to-LIS interface is the
-company's single largest interoperability gap.
+Everything profiled for Inflammatix is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/inflammatix/](https://apis.io/providers/inflammatix/)** — or go straight to one of the APIs or properties below.
 
-Contract discovery on 2026-08-01 probed `/openapi.json`, `/openapi.yaml`,
-`/swagger.json`, `/v1/openapi.json`, `/api-docs`, `/docs`, `/redoc`, every
-`/.well-known/` discovery path, `/llms.txt`, and the `api.`, `docs.`, `developer.`,
-`portal.`, `status.`, `trust.` and `security.` subdomains. All missed.
+### APIs (2)
 
-What Inflammatix does serve is two live, anonymously readable **WordPress REST content
-APIs**, both self-describing at `/wp-json/`:
+- [Inflammatix Website (WordPress REST)](https://apis.io/apis/inflammatix/inflammatix-com-website-wordpress-rest/) — The public WordPress REST API (wp-json) of the Inflammatix website at inflammatix.com: the route index of the site's content management system, catalogued…
+- [Inflammatix Website (WordPress REST)](https://apis.io/apis/inflammatix/support-inflammatix-com-website-wordpress-rest/) — The public WordPress REST API (wp-json) of the Inflammatix website at support.inflammatix.com: the route index of the site's content management system,…
 
-| API | Base URL | Operations | Notable |
-|---|---|---|---|
-| Site Content | `https://inflammatix.com/wp-json/wp/v2` | 20 | `publication` custom post type — the peer-reviewed clinical evidence library, as JSON |
-| Support & Training Content | `https://support.inflammatix.com/wp-json/wp/v2` | 26 | MemberPress Courses types backing the TriVerity/Myrna operator-training catalogue |
+### Published properties
 
-Both OpenAPI 3.1 contracts in `openapi/` are derived mechanically from the sites' own
-route-discovery documents — every path, method and parameter is copied verbatim.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Artifacts
+#### MCP servers (1)
 
-- `openapi/` — two OpenAPI 3.1 contracts (derived from live `/wp-json/` discovery)
-- `overlays/` — API Evangelist annotations, kept out of the harvested contracts
-- `examples/` — real response payloads captured live 2026-08-01
-- `authentication/` — WordPress Application Passwords (HTTP Basic); not required for reads
-- `conventions/` — pagination, filtering, sparse fields, error envelope, caching, CORS
-- `errors/` — the WordPress `{code, message, data}` error catalogue (not RFC 9457)
-- `data-model/` — entity graph read from each site's own type and taxonomy registries
-- `lifecycle/` — namespace-path versioning; no status page, deprecation policy or changelog
-- `conformance/` — ISO 13485:2016, FDA clearance, California device licence; no SOC 2, OAuth or FHIR
-- `security/` — domain security probe (TLS 1.3, no HSTS/DNSSEC/CAA, SPF present, DMARC quarantine)
-- `well-known/` — the negative `/.well-known/` probe record
-- `mcp/` — candidate tool design only; no MCP server exists, and no `MCPServer` pointer is wired
-- `skills/` — three agent skills grounded in real operationIds
-- `llms/` — generated `llms.txt`
+Model Context Protocol servers that expose the API to agents.
 
-## Not present
+- [inflammatix](https://apis.io/servers/inflammatix/inflammatix/)
 
-No developer portal, API reference, getting-started guide, SDK, CLI, or Postman
-collection. No GitHub organisation and no packages on any registry. No MCP server, no
-A2A agent card, no webhooks or AsyncAPI. No status page, SLA, changelog or deprecation
-policy. No security.txt, vulnerability disclosure programme, bug bounty or trust centre.
+#### Collections (2)
+
+Postman and Open Collection request collections.
+
+- [Inflammatix Site Content API (WordPress REST)](https://apis.io/collections/inflammatix/open-inflammatix-content/)
+- [Inflammatix Support & Training Content API (WordPress REST)](https://apis.io/collections/inflammatix/open-inflammatix-support-content/)
+
+#### Overlays (2)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Inflammatix Content Overlay](https://apis.io/overlays/inflammatix/inflammatix-content-overlay/)
+- [Inflammatix Support Content Overlay](https://apis.io/overlays/inflammatix/inflammatix-support-content-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Inflammatix Authentication](https://apis.io/security/inflammatix/inflammatix-authentication/)
+- [Inflammatix Domain Security](https://apis.io/security/inflammatix/inflammatix-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://inflammatix.com/)
+- [Support](https://support.inflammatix.com/)
+- [Blog](https://inflammatix.com/newsroom/news/)
+- [Compliance](https://inflammatix.com/about-us/)
+- [Terms of service](https://inflammatix.com/terms-and-conditions/)
+- [Privacy policy](https://inflammatix.com/privacy-and-cookies-statement/)
+
+## API Evangelist rating
+
+**Kin Score 24.5** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 65.2 |
+| Contract quality | 1.7 |
+| Contract governance | 18.2 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 30.4 |
+| Access clarity | 35.5 |
+
+**Agent readiness 4.8** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 22.1** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/inflammatix/](https://apis.io/providers/inflammatix/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Inflammatix: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/inflammatix/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
